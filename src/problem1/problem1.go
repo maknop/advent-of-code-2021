@@ -1,31 +1,47 @@
 package problem1
 
 import (
-	"bufio"
-	"fmt"
-	"os"
+	"strconv"
+	"strings"
+
+	"github.com/gobuffalo/packr/v2"
 )
 
 func RunProblem1() {
 	filename := "sonar_sweep_depths.txt"
 	data := GetFileContents(filename)
 
-	print(data)
+	print("\nThe answer to problem 1 is: ", CountIncreases(data), "\n")
 }
 
 func GetFileContents(filename string) []string {
-	var data []string
+	var data string
 
-	file, err := os.Open(filename)
+	// Text file is converted to go code and is executed as a binary.
+	box := packr.New("fileBox", "./")
+	data, err := box.FindString(filename)
 	if err != nil {
-		fmt.Println("ERROR: File does not exist.")
-		panic(err)
+		print(err)
 	}
-	defer file.Close()
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		data = append(data, scanner.Text())
+	DataArray := strings.Split(data, "\n")
+	return DataArray
+}
+
+func CountIncreases(DataArray []string) int {
+	var count int
+
+	for i := 0; i < len(DataArray)-1; i += 1 {
+		next, err := strconv.Atoi(DataArray[i+1])
+		curr, err := strconv.Atoi(DataArray[i])
+		if err != nil {
+			print(err)
+		}
+
+		if next > curr {
+			count += 1
+		}
 	}
-	return data
+
+	return count
 }
