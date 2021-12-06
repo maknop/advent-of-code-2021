@@ -17,7 +17,7 @@ func RunProblem1() {
 func GetFileContents(filename string) []string {
 	var data string
 
-	// Text file is converted to go code and is executed as a binary.
+	// Text file is converted to Golang code and is executed as binary when program is executed.
 	box := packr.New("fileBox", "./")
 	data, err := box.FindString(filename)
 	if err != nil {
