@@ -7,6 +7,7 @@
 package problem1
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -14,11 +15,20 @@ import (
 )
 
 func RunDay1() {
-	filename := "sonar_sweep_depths.txt"
-	data := GetFileContents(filename)
-	numIncreases := CountSingleMeasurementIncreases(data)
+	part1Filename := "part1_sonar_sweep_depths.txt"
+	part2Filename := "part2_sonar_sweep_depths.txt"
 
-	print("\nday 1, part 1: Sonar Sweep || The answer is: ", numIncreases, "\n")
+	part1Data := GetFileContents(part1Filename)
+	part2Data := GetFileContents(part2Filename)
+
+	// Part 1
+	numIncreasesPart1 := CountSingleMeasurementIncreases(part1Data)
+
+	// Part 2
+	numIncreasesPart2 := CountSingleMeasurementIncreases(part2Data)
+
+	fmt.Print("\nday 1, part 1: Sonar Sweep || The answer is: ", numIncreasesPart1)
+	fmt.Print("\nday 1, part 2: Sonar Sweep || The answer is: ", numIncreasesPart2, "\n")
 }
 
 func GetFileContents(filename string) []string {
@@ -62,14 +72,14 @@ func CountSingleMeasurementIncreases(DataArray []string) int {
 func CountSumsOfThreeIncreases(DataArray []string) int {
 	var count int
 
-	for i := 0; i < len(DataArray)-1; i += 1 {
-		next, err := strconv.Atoi(DataArray[i+1])
-		curr, err := strconv.Atoi(DataArray[i])
+	for i := 0; i < len(DataArray)-2; i += 1 {
+		nextSum, err := strconv.Atoi(DataArray[i] + DataArray[i+1] + DataArray[i+2])
+		currSum, err := strconv.Atoi(DataArray[i-1] + DataArray[i] + DataArray[i+1])
 		if err != nil {
 			print(err)
 		}
 
-		if next > curr {
+		if nextSum > currSum {
 			count += 1
 		}
 	}
