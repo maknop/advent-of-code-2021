@@ -1,13 +1,15 @@
 package main
 
 import (
-	p1 "advent-of-code-2021/src/problem1"
+	p1 "advent-of-code-2021/src/day1"
+	"fmt"
 )
 
 func main() {
-	problem1()
+	fmt.Print("\nAdvent of Code 2021\n-------------------")
+	day1()
 }
 
-func problem1() {
-	p1.RunProblem1()
+func day1() {
+	p1.RunDay1()
 }
