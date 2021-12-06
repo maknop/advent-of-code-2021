@@ -1,4 +1,4 @@
-# Adent of Code 2021
+# Advent of Code 2021
 
 # Information
 official Website: [Advent of Code](https://adventofcode.com/)
