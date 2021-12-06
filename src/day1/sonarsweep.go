@@ -74,7 +74,7 @@ func CountSumsOfThreeIncreases(DataArray []string) int {
 	for i := 0; i < len(DataArray); i += 1 {
 		curr, err := strconv.Atoi(DataArray[i])
 		if err != nil {
-			//print(err)
+			print(err)
 		}
 
 		sonarSweepData = append(sonarSweepData, curr)
