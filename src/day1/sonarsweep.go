@@ -15,17 +15,15 @@ import (
 )
 
 func RunDay1() {
-	part1Filename := "part1_sonar_sweep_depths.txt"
-	part2Filename := "part2_sonar_sweep_depths.txt"
+	filename := "sonar_sweep_depths.txt"
 
-	part1Data := GetFileContents(part1Filename)
-	part2Data := GetFileContents(part2Filename)
+	data := GetFileContents(filename)
 
 	// Part 1
-	numIncreasesPart1 := CountSingleMeasurementIncreases(part1Data)
+	numIncreasesPart1 := CountSingleMeasurementIncreases(data)
 
 	// Part 2
-	numIncreasesPart2 := CountSingleMeasurementIncreases(part2Data)
+	numIncreasesPart2 := CountSumsOfThreeIncreases(data)
 
 	fmt.Print("\nday 1, part 1: Sonar Sweep || The answer is: ", numIncreasesPart1)
 	fmt.Print("\nday 1, part 2: Sonar Sweep || The answer is: ", numIncreasesPart2, "\n")
@@ -71,13 +69,23 @@ func CountSingleMeasurementIncreases(DataArray []string) int {
  ************************************/
 func CountSumsOfThreeIncreases(DataArray []string) int {
 	var count int
+	var sonarSweepData []int
 
-	for i := 0; i < len(DataArray)-2; i += 1 {
-		nextSum, err := strconv.Atoi(DataArray[i] + DataArray[i+1] + DataArray[i+2])
-		currSum, err := strconv.Atoi(DataArray[i-1] + DataArray[i] + DataArray[i+1])
+	for i := 0; i < len(DataArray); i += 1 {
+		curr, err := strconv.Atoi(DataArray[i])
 		if err != nil {
-			print(err)
+			//print(err)
 		}
+
+		sonarSweepData = append(sonarSweepData, curr)
+	}
+
+	for i := 1; i < len(sonarSweepData)-2; i += 1 {
+		currSum := 0
+		nextSum := 0
+
+		currSum = sonarSweepData[i-1] + sonarSweepData[i] + sonarSweepData[i+1]
+		nextSum = sonarSweepData[i] + sonarSweepData[i+1] + sonarSweepData[i+2]
 
 		if nextSum > currSum {
 			count += 1
